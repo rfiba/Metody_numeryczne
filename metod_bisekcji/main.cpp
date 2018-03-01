@@ -1,4 +1,5 @@
-/* Bisection method for quadratic function
+/*
+Bisection method for quadratic function
 rfiba - March 2018
  */
 #include <iostream>
@@ -6,7 +7,7 @@ rfiba - March 2018
 
 using namespace std;
 
-const double precision = 0.1;
+const double precision = 0.0000001;
 
 double calculateValueOfFunction(int aFactor, int bFactor, int cFactor, double point)
 {
@@ -14,10 +15,10 @@ double calculateValueOfFunction(int aFactor, int bFactor, int cFactor, double po
     return aFactor*pow(point,2) + bFactor*point + cFactor;
 }
 
-double doBisection(int aFactor, int bFactor, int cFactor, int beginOfInterval, int endOfInterval)
+double doBisection(int aFactor, int bFactor, int cFactor, double beginOfInterval, double endOfInterval)
 {
     double result = (beginOfInterval+endOfInterval)/2;
-    int valueOfResult = calculateValueOfFunction(aFactor,bFactor,cFactor,result);
+    double valueOfResult = calculateValueOfFunction(aFactor,bFactor,cFactor,result);
     if(abs(beginOfInterval-endOfInterval) <= precision)
         return result;
 

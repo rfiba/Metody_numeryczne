@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Regula_falsi.dir/main.cpp.o  -o Regula_falsi 
