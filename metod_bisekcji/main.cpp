@@ -1,3 +1,6 @@
+/* Bisection method for quadratic
+rfiba - March 2018
+ */
 #include <iostream>
 #include <cmath>
 
@@ -30,15 +33,13 @@ double doBisection(int aFactor, int bFactor, int cFactor, int beginOfInterval, i
 
 int main()
 {
-    int a,b,c, beginOfInterval, endOfInterval;
+    int aFactor,bFactor, cFactor, beginOfInterval, endOfInterval;
+
     cout << "Get a, b and c factor" << endl;
-    cin >> a >> b >> c;
+    cin >> aFactor >> bFactor >> cFactor;
     cout << "Get endpoints of interval" << endl;
     cin >> beginOfInterval >> endOfInterval;
-    cout << doBisection(a,b,c,beginOfInterval, endOfInterval) << endl;
-
-
-
+    cout << doBisection(aFactor,bFactor,cFactor,beginOfInterval, endOfInterval) << endl;
 
     return 0;
 }
