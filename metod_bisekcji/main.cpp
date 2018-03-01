@@ -1,4 +1,4 @@
-/* Bisection method for quadratic
+/* Bisection method for quadratic function
 rfiba - March 2018
  */
 #include <iostream>
