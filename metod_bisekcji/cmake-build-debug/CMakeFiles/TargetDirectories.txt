@@ -1,0 +1,3 @@
+/home/rfiba/CLionProjects/Metody_numeryczne/metod_bisekcji/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/rfiba/CLionProjects/Metody_numeryczne/metod_bisekcji/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rfiba/CLionProjects/Metody_numeryczne/metod_bisekcji/cmake-build-debug/CMakeFiles/metod_bisekcji.dir

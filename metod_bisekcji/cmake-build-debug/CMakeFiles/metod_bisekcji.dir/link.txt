@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/metod_bisekcji.dir/main.cpp.o  -o metod_bisekcji 
