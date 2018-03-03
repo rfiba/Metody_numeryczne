@@ -9,25 +9,19 @@ using namespace std;
 
 const double precision = 0.000001;
 
-double calculateRoot(double root)
+double calculateRoot(double root, double startPoint, double secondPoint)
 {
-    double sideA = 1, sideB = root;
+    if(abs(startPoint-secondPoint) <= precision)
+        return startPoint;
 
-    while(abs(sideA-sideB)>=precision)
-    {
-        sideA = (sideA+sideB)/2.;
-        sideB = root/sideA;
-    }
-
-    return sideA;
-
+    calculateRoot(root, (0.5)*(startPoint+(root/startPoint)), startPoint);
 }
 
 int main() {
     double root;
     cout << "Get number" << endl;
     cin >> root;
-    cout << calculateRoot(root) << endl;
+    cout << calculateRoot(root, 1,root) << endl;
 
     return 0;
 }
