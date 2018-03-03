@@ -1,5 +1,5 @@
 /*
-Bisection method for quadratic function
+Bisection method for quadratic function y
 rfiba - March 2018
  */
 #include <iostream>
