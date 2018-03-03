@@ -1,6 +1,6 @@
 /*
  Regula falsi method
- rfiba March 2018
+ rfiba March 2018 y
  */
 #include <iostream>
 #include <cmath>
