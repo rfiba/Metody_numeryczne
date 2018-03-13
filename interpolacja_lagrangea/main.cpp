@@ -6,13 +6,13 @@ double lagrangeInterpolation(double *arrOfX, double *arrOfY, double x, int numbe
 {
     double y = 0;
 
-    for(int i; i < numberOfPoints; i++)
+    for(int i = 0; i < numberOfPoints; i++)
     {
         double tmp = 1;
         for(int j = 0; j < numberOfPoints; j++)
         {
             if(j!=i)
-                tmp = (x - arrOfX[j])/(arrOfX[i]-arrOfX[j]);
+                tmp *= (x - arrOfX[j])/(arrOfX[i]-arrOfX[j]);
         }
         y += tmp * arrOfY[i];
     }
