@@ -1,8 +1,8 @@
 #include <iostream>
 
 struct Point{
-    int x;
-    int y;
+    double x;
+    double y;
 };
 
 
@@ -39,6 +39,6 @@ double calculateNewtonInterpolation(int n, Point *arr, double x)
 }
 
 int main() {
-
+    
     return 0;
 }
