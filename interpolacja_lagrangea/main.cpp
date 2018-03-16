@@ -2,33 +2,36 @@
 
 using namespace std;
 
-double lagrangeInterpolation(double *arrOfX, double *arrOfY, double x, int numberOfPoints)
+struct Point{
+    double x;
+    double y;
+};
+
+double lagrangeInterpolation(Point *arr, double x, int numberOfPoints)
 {
     double y = 0;
 
     for(int i = 0; i < numberOfPoints; i++)
     {
         double tmp = 1;
-        for(int j = 0; j < numberOfPoints; j++)
-        {
-            if(j!=i)
-                tmp *= (x - arrOfX[j])/(arrOfX[i]-arrOfX[j]);
+        for (int j = 0; j < numberOfPoints; j++) {
+            if (j != i)
+                tmp *= (x - arr[j].x) / (arr[i].x - arr[j].x);
         }
-        y += tmp * arrOfY[i];
+        y += tmp * arr[i].y;
     }
-
     return y;
 }
 int main() {
     int n;
     cin >> n;
-    double *arrOfX =  new double[n];
-    double *arrOfY =  new double[n];
+    Point *arr =  new Point[n];
+
     for(int i = 0; i < n; i++)
     {
-        cin >> arrOfX[i] >> arrOfY[i];
+        cin >> arr[i].x >> arr[i].y;
     }
-    cout << lagrangeInterpolation(arrOfX, arrOfY, 5, 3) << endl;
+    cout << lagrangeInterpolation(arr, 5, 3) << endl;
     system("pause");
     return 0;
 }
