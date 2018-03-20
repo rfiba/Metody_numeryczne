@@ -30,7 +30,7 @@ double calculateDifferenceQuotient(int n, Point *arr)
     return result;
 }
 
-double calculateNewtonInterpolation(int n, Point *arr, double x)
+double calculateNewtonInterpolation(int n, Point *arr, double x, int *differenceArr)
 {
 
     double result = 0, tmp = 1;
@@ -40,10 +40,8 @@ double calculateNewtonInterpolation(int n, Point *arr, double x)
         tmp = 1.;
         for(int j = 0; j < i ; j++)
             tmp *= (x - arr[j].x);
-
-        //tmp *= calculateDifferenceQuotient(i, arr);
-
-        result += tmp * calculateDifferenceQuotient(i, arr);
+        
+        result += tmp * differenceArr[i];
     }
     return result;
 }
@@ -52,6 +50,7 @@ int main() {
     int n;
     cin >> n;
     Point *arr =  new Point[n];
+    int *differenceArr = new int[n];
 
     for(int i = 0; i < n; i++)
     {
@@ -60,10 +59,10 @@ int main() {
     }
 
     for(int i = 0; i < n; i++)
-        calculateDifferenceQuotient(i, arr);
+        differenceArr[i] = calculateDifferenceQuotient(i, arr);
 
     for(int i = -5; i <= 5; i++)
-        cout << "f("<< i << ") = " << calculateNewtonInterpolation(5,arr,i) << endl;
+        cout << "f("<< i << ") = " << calculateNewtonInterpolation(5,arr,i, differenceArr) << endl;
 
     cout << "real: " << endl;
     for(int i =-5; i <= 5; i++ )
