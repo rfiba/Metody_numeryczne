@@ -43,45 +43,43 @@ double calculateNewtonInterpolation(int n, Point *arr, double x, int *difference
     return result;
 }
 
-void createDifferentQuotientArray(int n, Point *arr)
-{
-    double **array = new double*[2*n-1];
-    for(int i = 0; i < 2*n-1; i++)
+double** createDifferentQuotientArray(int n, Point *arr, bool i) {
+    double **array = new double *[n];
+    for (int i = 0; i < n; i++) {
         array[i] = new double[n];
-    //double array[5][5];
-
-    for(int i = 0, j = 0; i < 2*n-1; i+=2, j++)
-        array[i][0] = arr[j].y;
-
-
-    for(int i = 1, k = 2*n-1; i < n; i++, k--)
-    {
-        for(int j = i, t=i; j < k; j+=2, t++)
-        {
-            cout << "dla " << j << " " << i << endl;
-            printf("%f - %f / %f - %f", array[j+1][i-1], array[j-1][i-1], arr[t].x, arr[t-i].x);
-            cout << endl;
-            array[j][i] = (array[j+1][i-1]-array[j-1][i-1])/(arr[t].x-arr[t-i].x);
-            cout << array[j][i] << endl;
-        }
+        array[i][0] = arr[i].y;
     }
-    cout << "po" << endl;
+
+    for (int i = 1; i < n; i++)
+        for (int j = i; j < n; j++)
+            array[j][i] = (array[j][i-1] - array[j-1][i - 1]) / (arr[j].x - arr[j - i].x);
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << " " << array[i][j];
+        }
+        cout << endl;
+    }
+
+    return array;
 }
 
 int main() {
     int n;
     cin >> n;
     Point *arr =  new Point[n];
-    int *differenceArr = new int[n];
-
+    double ** array;
     for(int i = 0; i < n; i++)
         cin >> arr[i].x >> arr[i].y;
-    //for(int i = 0; i < n; i++)
-      //  differenceArr[i] = calculateDifferenceQuotient(i, arr);
 
-    createDifferentQuotientArray(n,arr);
-    //for(int i = -5; i <= 5; i++)
-      //  cout << "f("<< i << ") = " << calculateNewtonInterpolation(n,arr,i, differenceArr) << endl;
+    array = createDifferentQuotientArray(n,arr,1);
+    for (int i = 0; i < n; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << " " << array[i][j];
+        }
+        cout << endl;
+    }
+    delete arr, array;
 
     return 0;
 }
