@@ -49,8 +49,12 @@ double calculateArea(int degreeOfPolynomial, int numberOfPoints, double *coeffic
     {
         x = beginOfRange + (rand()/INT_MAX)*(endOfRange-beginOfRange);
         y = minimumInRange + (rand()/INT_MAX)*(maximumInRange - minimumInRange);
-        if(checkPointInArea())
+
+        if(checkPointInArea(x, y, degreeOfPolynomial, coefficientArr))
+            inTarget++;
     }
+
+    return (inTarget/numberOfPoints)*area;
 }
 
 int main() {
