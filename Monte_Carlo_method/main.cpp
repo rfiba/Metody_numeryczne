@@ -23,7 +23,7 @@ bool checkPointInArea(double x, double y, int degreeOfPolynomial, double * coeff
 {
     if(y >= 0)
     {
-        if( calculatePolynomial(degreeOfPolynomial,coefficientArr, x) > y)
+        if(calculatePolynomial(degreeOfPolynomial,coefficientArr, x) > y)
             return true;
         else
             return false;
@@ -40,34 +40,38 @@ bool checkPointInArea(double x, double y, int degreeOfPolynomial, double * coeff
 double calculateArea(int degreeOfPolynomial, int numberOfPoints, double *coefficientArr, double minimumInRange,
                     double maximumInRange,double beginOfRange,double endOfRange)
 {
-    srand(time(NULL));
-    double area = (maximumInRange-minimumInRange)*(endOfRange*beginOfRange);
+
+    double area = (maximumInRange-minimumInRange)*(endOfRange-beginOfRange);
+
     double x, y;
     int inTarget = 0;
 
     for(int i = 0; i < numberOfPoints; i++)
     {
-        x = beginOfRange + (rand()/INT_MAX)*(endOfRange-beginOfRange);
-        y = minimumInRange + (rand()/INT_MAX)*(maximumInRange - minimumInRange);
+        x = beginOfRange + ((double)rand()/RAND_MAX)*(endOfRange-beginOfRange);
+        y = minimumInRange + ((double)rand()/RAND_MAX)*(maximumInRange - minimumInRange);
 
         if(checkPointInArea(x, y, degreeOfPolynomial, coefficientArr))
             inTarget++;
     }
 
-    return (inTarget/numberOfPoints)*area;
+    return ((double)inTarget/numberOfPoints)*area;
 }
 
 int main() {
+    srand(time(NULL));
     int degreeOfPolynomial, numberOfPoints;
     double minimumInRange, maximumInRange, beginOfRange, endOfRange;
-    cin >> degreeOfPolynomial >> minimumInRange >> maximumInRange >> beginOfRange >> endOfRange;
+    cin >> degreeOfPolynomial >> numberOfPoints >> minimumInRange >> maximumInRange >> beginOfRange >> endOfRange;
 
     double *coefficientArr = new double[degreeOfPolynomial+1];
 
     for (int i = 0; i <= degreeOfPolynomial; i++)
         cin >> coefficientArr[i];
 
-    cout << calculatePolynomial(degreeOfPolynomial, coefficientArr, 5) << endl;
+    for(int i = 0; i < 10; i++)
+        cout << calculateArea(degreeOfPolynomial, numberOfPoints, coefficientArr, minimumInRange, maximumInRange,
+                              beginOfRange, endOfRange) << endl;
 
     return 0;
 }
