@@ -1,0 +1,3 @@
+/home/rfiba/CLionProjects/Metody_numeryczne/Least_squares_approximation/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/rfiba/CLionProjects/Metody_numeryczne/Least_squares_approximation/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/rfiba/CLionProjects/Metody_numeryczne/Least_squares_approximation/cmake-build-debug/CMakeFiles/Least_squares_approximation.dir

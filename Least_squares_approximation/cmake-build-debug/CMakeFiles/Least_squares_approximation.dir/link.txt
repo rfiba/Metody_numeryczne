@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Least_squares_approximation.dir/main.cpp.o  -o Least_squares_approximation 
