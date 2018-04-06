@@ -9,4 +9,6 @@
 /home/rfiba/CLionProjects/Metody_numeryczne/Least_squares_approximation/main.cpp
 iostream
 -
+cmath
+-
 
