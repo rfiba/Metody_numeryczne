@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <ctime>
+#include <climits>
 
 using namespace std;
 
@@ -18,9 +19,22 @@ double calculatePolynomial(int degreeOfPolynomial, double * coefficientArr, doub
     return result;
 }
 
-int checkPointInArea(double x, double y, int degreeOfPolynomial, double * coefficientArr)
+bool checkPointInArea(double x, double y, int degreeOfPolynomial, double * coefficientArr)
 {
-    return 0;
+    if(y >= 0)
+    {
+        if( calculatePolynomial(degreeOfPolynomial,coefficientArr, x) > y)
+            return true;
+        else
+            return false;
+    }
+    else
+    {
+        if( calculatePolynomial(degreeOfPolynomial,coefficientArr, x) < y)
+            return true;
+        else
+            return false;
+    }
 }
 
 double calculateArea(int degreeOfPolynomial, int numberOfPoints, double *coefficientArr, double minimumInRange,
@@ -28,6 +42,15 @@ double calculateArea(int degreeOfPolynomial, int numberOfPoints, double *coeffic
 {
     srand(time(NULL));
     double area = (maximumInRange-minimumInRange)*(endOfRange*beginOfRange);
+    double x, y;
+    int inTarget = 0;
+
+    for(int i = 0; i < numberOfPoints; i++)
+    {
+        x = beginOfRange + (rand()/INT_MAX)*(endOfRange-beginOfRange);
+        y = minimumInRange + (rand()/INT_MAX)*(maximumInRange - minimumInRange);
+        if(checkPointInArea())
+    }
 }
 
 int main() {
