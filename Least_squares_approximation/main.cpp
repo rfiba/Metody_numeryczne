@@ -1,3 +1,10 @@
+/*
+ * @author rfiba, April 2018
+ * input:
+ * numberOfPoints degreeOfPolynomial
+ * xs
+ * ys
+ */
 #include <iostream>
 #include <cmath>
 
@@ -47,10 +54,17 @@ double sumOfArrayYPower(int numberOfPoints, double *arrX, double *arrY, double p
 void do_Lest_Squares_Equations(double *arrX, double *arrY, double **resultArr, int numberOfPoints, int degreeOfPolynomial)
 {
 
-    for(int i = 0; i <= degreeOfPolynomial; i++)
+    for(int i = 0, j = 0; i <= degreeOfPolynomial; i++, j = 0)
     {
-        for(int j = 0; j <= degreeOfPolynomial; j++)
-            resultArr[i][j] = sumOfArrayXPower(numberOfPoints, arrX, j+i);
+        for(; j <degreeOfPolynomial; j++)
+        {
+            if(i)
+                resultArr[i][j] = resultArr[i-1][j+1];
+            else
+                resultArr[i][j] = sumOfArrayXPower(numberOfPoints, arrX, j + i);
+        }
+
+        resultArr[i][j] = sumOfArrayXPower(numberOfPoints, arrX, j + i);cd ..
     }
 
     for(int i = 0; i <= degreeOfPolynomial; i++)
@@ -69,7 +83,10 @@ int main() {
         resultArr[i] = new double[degreeOfPolynomial+2];
 
     for(int i = 0; i < numberOfPoints; i++)
-        cin >> arrX[i] >> arrY[i];
+        cin >> arrX[i];
+
+    for(int i = 0; i < numberOfPoints; i++)
+        cin >> arrY[i];
 
     do_Lest_Squares_Equations(arrX, arrY, resultArr, numberOfPoints, degreeOfPolynomial);
     for(int i = 0; i <= degreeOfPolynomial; i++)
