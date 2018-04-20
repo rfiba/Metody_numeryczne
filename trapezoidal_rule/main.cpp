@@ -1,6 +1,9 @@
 /*
  * @author: rfiba April 2018
  * Trapeizoidal Rule
+ * Input:
+ * [Degree of Polynomial] [Number of trapezoids] [Begin of range] [end of range]
+ * [coefficients from a0 to an]
  */
 #include <iostream>
 #include <cmath>
@@ -24,22 +27,26 @@ double calculateAreaOfTrapezoid(double aBase, double bBase, double height)
 
 double calculateArea(int degreeOfPolynomial, int numberOfTrapezoids, int beginOfRange, int endOfRange, double * coefficientArr)
 {
-    double legOfTrapezoid = (endOfRange-beginOfRange)/numberOfTrapezoids;
-    double result = 0, beginPoint = beginOfRange;
+    double legOfTrapezoid = (double)(endOfRange-beginOfRange)/numberOfTrapezoids;
+    double result = 0, beginPoint = beginOfRange, valueOfEndPoint;
+    double valueOfBeginPoint = calculatePolynomial(degreeOfPolynomial, coefficientArr, beginPoint);
+
     for(int i = 0; i < numberOfTrapezoids;i++)
     {
-        result += calculateAreaOfTrapezoid(calculatePolynomial(degreeOfPolynomial, coefficientArr, beginPoint),
-        calculatePolynomial(degreeOfPolynomial, coefficientArr, beginPoint+legOfTrapezoid),
-        legOfTrapezoid);
+        valueOfEndPoint = calculatePolynomial(degreeOfPolynomial, coefficientArr, beginPoint+legOfTrapezoid);
+        result += calculateAreaOfTrapezoid(valueOfBeginPoint, valueOfEndPoint, legOfTrapezoid);
+        valueOfBeginPoint = valueOfEndPoint;
+        beginPoint += legOfTrapezoid;
     }
+
     return result;
 }
 
 int main() {
-    int degreeOfPolynomial, numberOfPoints, numberOfTrapezoids, beginOfRange, endOfRange;
+    int degreeOfPolynomial, numberOfTrapezoids, beginOfRange, endOfRange;
 
-    double *coefficientArr = new double[degreeOfPolynomial+1];
     cin >> degreeOfPolynomial >> numberOfTrapezoids >> beginOfRange >> endOfRange;
+    double *coefficientArr = new double[degreeOfPolynomial+1];
 
     for (int i = 0; i <= degreeOfPolynomial; i++)
         cin >> coefficientArr[i];
