@@ -1,6 +1,10 @@
 /*
  * @author: rfiba April 2018
  * Monte Carlo Method
+ * Input:
+ * [degree of polynomial]
+ * [number of points] [xMin] [xMax]
+ * [coefficients from a0 to an]
  */
 #include <iostream>
 #include <cmath>
@@ -19,50 +23,23 @@ double calculatePolynomial(int degreeOfPolynomial, double * coefficientArr, doub
     return result;
 }
 
-bool checkPointInArea(double x, double y, int degreeOfPolynomial, double * coefficientArr)
+double calculateIntegral(int degreeOfPolynomial, int numberOfPoints, double *coefficientArr, double xMin, double xMax)
 {
-    if(y >= 0)
-    {
-        if(calculatePolynomial(degreeOfPolynomial,coefficientArr, x) > y)
-            return true;
-        else
-            return false;
-    }
-    else
-    {
-        if( calculatePolynomial(degreeOfPolynomial,coefficientArr, x) < y)
-            return true;
-        else
-            return false;
-    }
-}
-
-double calculateArea(int degreeOfPolynomial, int numberOfPoints, double *coefficientArr, double minimumInRange,
-                    double maximumInRange,double beginOfRange,double endOfRange)
-{
-
-    double area = (maximumInRange-minimumInRange)*(endOfRange-beginOfRange);
-
-    double x, y;
+    double x;
+    double result = 0;
     int inTarget = 0;
 
     for(int i = 0; i < numberOfPoints; i++)
-    {
-        x = beginOfRange + ((double)rand()/RAND_MAX)*(endOfRange-beginOfRange);
-        y = minimumInRange + ((double)rand()/RAND_MAX)*(maximumInRange - minimumInRange);
+        result += calculatePolynomial(degreeOfPolynomial, coefficientArr, xMin + ((double)rand()/RAND_MAX)*(xMax - xMin));
 
-        if(checkPointInArea(x, y, degreeOfPolynomial, coefficientArr))
-            inTarget++;
-    }
-
-    return ((double)inTarget/numberOfPoints)*area;
+    return (xMax-xMin)*(result/numberOfPoints);
 }
 
 int main() {
     srand(time(NULL));
     int degreeOfPolynomial, numberOfPoints;
-    double minimumInRange, maximumInRange, beginOfRange, endOfRange;
-    cin >> degreeOfPolynomial >> numberOfPoints >> minimumInRange >> maximumInRange >> beginOfRange >> endOfRange;
+    double xMin, xMax;
+    cin >> degreeOfPolynomial >> numberOfPoints >> xMin >> xMax;
 
     double *coefficientArr = new double[degreeOfPolynomial+1];
 
@@ -70,8 +47,7 @@ int main() {
         cin >> coefficientArr[i];
 
     for(int i = 0; i < 10; i++)
-        cout << calculateArea(degreeOfPolynomial, numberOfPoints, coefficientArr, minimumInRange, maximumInRange,
-                              beginOfRange, endOfRange) << endl;
+        cout << calculateIntegral(degreeOfPolynomial, numberOfPoints, coefficientArr, xMin, xMax) << endl;
 
     return 0;
 }
