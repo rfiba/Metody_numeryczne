@@ -1,4 +1,10 @@
 #include <iostream>
+/*
+ * @author: rfiba MAy 2018
+ * Forward Euler Method
+ * Input:
+ * [numberOfPoints] [xMin] [xMax] [value of xMin]
+ */
 
 using namespace std;
 
