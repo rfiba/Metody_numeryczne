@@ -4,7 +4,7 @@ using namespace std;
 
 double calculataFunction(double t, double x)
 {
-    return 0;
+    return x/(2*t+2);
 }
 
 void calculateEulerMethod(double xMin, double xMax, int numberOfPoints, double valueOfXMin, double *resultArr)
@@ -13,7 +13,7 @@ void calculateEulerMethod(double xMin, double xMax, int numberOfPoints, double v
     resultArr[0] = valueOfXMin;
     double t = xMin, tPrevious = xMin;
 
-    for(int i = 1; i < numberOfPoints; i++)
+    for(int i = 1; i <= numberOfPoints; i++)
     {
         resultArr[i] = resultArr[i-1] + step*calculataFunction(tPrevious, resultArr[i-1]);
         tPrevious = t;
@@ -26,7 +26,9 @@ int main() {
     double xMin, xMax, valueOfXMin;
     cin >> numberOfPoints >> xMin >> xMax >> valueOfXMin;
     double * resultArr = new double[numberOfPoints];
-    
+    calculateEulerMethod(xMin, xMax, numberOfPoints, valueOfXMin, resultArr);
+    for(int i = 0; i < numberOfPoints; i++)
+       cout << resultArr[i] << endl;
     delete resultArr;
     return 0;
 }
