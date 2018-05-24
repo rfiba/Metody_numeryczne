@@ -2,19 +2,33 @@
 
 using namespace std;
 
-double calcuateFunction(double x, double y)
+struct Point {
+	double x;
+	double y;
+};
+
+double calcuateFunction(Point toCalculate)
 {
 	return 0;
 }
 
-double 
+double calculateRungeKuttaMethod(Point initiaPoint, double step, int numberOfPoints, double * result)
+{
+	double k1, k2, k3, k4;
+	for (int i = 1; i < numberOfPoints; i++)
+	{
+		k1 = step*calcuateFunction()
+	}
+}
 
 int main() {
-	double x0, y0, step;
+	double step;
+	Point initialPoint;
 	int numberOfPoints;
-	int *result = new int[numberOfPoints];
-	cin >> numberOfPoints >> x0 >> y0 >> step;
-
+	Point *result = new Point[numberOfPoints+1];
+	
+	cin >> numberOfPoints >> initialPoint.x >> initialPoint.y >> step;
+	result[0] = initialPoint;
 	delete result;
 	return 0;
 }
