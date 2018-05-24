@@ -25,7 +25,7 @@ struct Point {
 	}
 };
 
-double calcuateFunction(Point toCalculate)
+double calculateFunction(Point toCalculate)
 {
 	return toCalculate.x + toCalculate.y;
 }
@@ -35,10 +35,10 @@ void calculateRungeKuttaMethod(Point initialPoint, double step, int numberOfPoin
 	double k1, k2, k3, k4;
 	for (int i = 1; i <= numberOfPoints; i++)
 	{
-		k1 = step*calcuateFunction(result[i - 1]);
-		k2 = step*calcuateFunction(result[i - 1] + Point(0.5*step, k1/2));
-		k3 = step*calcuateFunction(result[i - 1] + Point(0.5*step, k2/2));
-		k4 = step*calcuateFunction(result[i - 1] + Point(step, k3));
+		k1 = step*calculateFunction(result[i - 1]);
+		k2 = step*calculateFunction(result[i - 1] + Point(0.5*step, k1/2));
+		k3 = step*calculateFunction(result[i - 1] + Point(0.5*step, k2/2));
+		k4 = step*calculateFunction(result[i - 1] + Point(step, k3));
 		result[i].y = result[i - 1].y + (k1 + 2 * k2 + 2 * k3 + k4) / 6;
 		result[i].x = result[i - 1].x + step;
 	}
