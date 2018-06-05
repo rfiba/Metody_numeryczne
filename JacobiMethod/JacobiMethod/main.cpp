@@ -37,18 +37,48 @@ void reverseDiagonalMatrix(int numberOfXs, double **diagonalMatrix, double **dia
 		diagonalReverseMatrix[i][i] = 1 / diagonalMatrix[i][i];
 }
 
-double** sumOfMatrices(int numberOfXs, double **toAddA, double **toAddB)
+double** sumLowerUpperMatrices(int numberOfXs, double **arrX)
+{
+	double** result = arrX;
+	for (int i = 0; i < numberOfXs; i++)
+		result[i][i] = 0;
+
+	return result;
+}
+
+double** multiplyMatrices(int numberOfXs, double **toMultiplyA, double **toMultiplyB)
 {
 	double** result = new double*[numberOfXs];
 	for (int i = 0; i < numberOfXs; i++)
 		result[i] = new double[numberOfXs];
-	
+
 	for (int i = 0; i < numberOfXs; i++)
 	{
 		for (int j = 0; j < numberOfXs; j++)
-			result[i][j] = toAddA[i][j] + toAddB[i][j];
+			result[i][j] = 0;
+	}
+
+	for (int i = 0; i < numberOfXs; i++)
+	{
+		for (int j = 0; j < numberOfXs; j++)
+		{
+			for (int k = 0; k < numberOfXs; k++)
+				result[i][j] += toMultiplyA[i][k] * toMultiplyB[k][j];
+		}
 	}
 	return result;
+}
+
+double** minusMatrix(int numberOfXs, double** matrix)
+{
+	double** result = matrix;
+	for (int i = 0; i < numberOfXs; i++)
+	{
+		for (int j = 0; j < numberOfXs; j++)
+			result[i][j] = -result[i][j];
+	}
+
+	return matrix;
 }
 void calculateJacobiMethod() {}
 
@@ -93,7 +123,10 @@ int main()
 	reverseDiagonalMatrix(numberOfXs, diagonalMatrix, diagonalReverseMatrix);
 	showMatrix(numberOfXs, diagonalReverseMatrix);
 	cout << endl << endl;
-	showMatrix(numberOfXs, sumOfMatrices(numberOfXs, lowerMatrix, upperMatrix));
+	double ** tmp = sumLowerUpperMatrices(numberOfXs, arrX);
+	showMatrix(numberOfXs, tmp);
+	cout << endl << endl;
+	showMatrix(numberOfXs, multiplyMatrices(numberOfXs, minusMatrix(numberOfXs, diagonalReverseMatrix), tmp));
 	system("pause");
 
 	
